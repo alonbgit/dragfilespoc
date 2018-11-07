@@ -22,11 +22,11 @@ class FileDropper extends Component {
         const items = e.dataTransfer.items;
         if (items) {
             for(let i = 0; i < items.length; i++) {
-            const item = items[i];
-            if (item.kind === 'file') {
-                const file = item.getAsFile();
-                files.push(file);
-            }
+                const item = items[i];
+                if (item.kind === 'file') {
+                    const file = item.getAsFile();
+                    files.push(file);
+                }
             }
         }
 
