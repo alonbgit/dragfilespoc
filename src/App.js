@@ -1,25 +1,49 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import classNames from 'classnames';
+import './App.scss';
+import FileDropper from './components/FileDropper/FileDropper';
 
 class App extends Component {
+
+  state = {
+    selected: false,
+  }
+
+  onDropped = (e) => {
+    console.log(e);
+  }
+
+  onDragOver = () => {
+    console.log('drag over');
+  }
+
+  onDragEnter = () => {
+    console.log('enter');
+    this.setState({
+      selected: true
+    });
+  }
+
+  onDragLeave = () => {
+    console.log('leave');
+    this.setState({
+      selected: false
+    });
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className='App'>
+        <FileDropper
+          onDropped={this.onDropped}
+          onDragOver={this.onDragOver}
+          onDragEnter={this.onDragEnter}
+          onDragLeave={this.onDragLeave}
+        >
+          <div id='drop_zone' className={classNames({ selected: this.state.selected })}>
+            <p>Drag one or more files to this Drop Zone ...</p>
+          </div>
+        </FileDropper>
       </div>
     );
   }
